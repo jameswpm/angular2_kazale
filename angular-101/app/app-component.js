@@ -18,11 +18,21 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.tasks = [];
                 }
+                AppComponent.prototype.add = function () {
+                    if (this.txtTask != '') {
+                        this.tasks.push(this.txtTask);
+                        this.txtTask = '';
+                    }
+                };
+                AppComponent.prototype.remove = function (index) {
+                    this.tasks.splice(index, 1);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: '<h1>My first app with angular 2!! Yeah!!</h1>'
+                        template: "\n\t<h1>Angular 2- Second Class</h1>\n\t<h2>Todo List</h2>\n\t<ul>\n\t\t<li *ngFor=\"#task of tasks; #i = index\">\n\t\t\t{{task}} <a href=\"#\" (click)=\"remove(i)\">[ X ]</a>\n\t\t</li>\n\t</ul>\n\t<input type=\"text\" name=\"task\" placeholder=\"Enter your task...\"\n\t\t[(ngModel)]=\"txtTask\">\n\t<button (click)=\"add()\">Adicionar</button>\n\t"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
